@@ -49,19 +49,19 @@ export class ApiService implements ApiServiceInterface {
   }
 
   async get<T>(url: string, data: Object = {}): Promise<T> {
-    return await this.sendRequest<T>(AllowedMethods.GET, url, data);
+    return await this.sendRequest(AllowedMethods.GET, url, data);
   }
 
   async post<T>(url: string, data: Object = {}): Promise<T> {
-    return await this.sendRequest<T>(AllowedMethods.POST, url, data);
+    return await this.sendRequest(AllowedMethods.POST, url, data);
   }
 
   async put<T>(url: string, data: Object = {}): Promise<T> {
-    return await this.sendRequest<T>(AllowedMethods.PUT, url, data);
+    return await this.sendRequest(AllowedMethods.PUT, url, data);
   }
 
   async delete<T>(url: string, data: Object = {}): Promise<T> {
-    return await this.sendRequest<T>(AllowedMethods.DELETE, url, data);
+    return await this.sendRequest(AllowedMethods.DELETE, url, data);
   }
 
   async sendRequest<T>(
@@ -81,8 +81,8 @@ export class ApiService implements ApiServiceInterface {
     }
 
     return await this._fetch({ method, url, data, params })
-      .then(response => this.handleResponse<T>(response))
-      .catch(error => this.handleError<T>(error));
+      .then(response => this.handleResponse(response))
+      .catch(error => this.handleError(error));
   }
 
   handleResponse<T>(response: Object): Promise<T> {
