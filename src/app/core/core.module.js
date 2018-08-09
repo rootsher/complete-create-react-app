@@ -1,9 +1,39 @@
+import { AccessTokenService } from './services/access-token.service';
+import { ApiService } from './services/api.service';
+import { LogService } from './services/log.service';
+import { NavigationService } from './services/navigation.service';
+
 import reducers from './reducers';
 import coreStore from './stores/core.store';
 
 export function module() {
   return {
-    services: {},
+    services: {
+      'core.services.accessTokenService': {
+        class: AccessTokenService,
+        public: true,
+        arguments: [{ $ref: 'core.services.logService' }, 'accessToken']
+      },
+      'core.services.apiService': {
+        class: ApiService,
+        public: true,
+        arguments: [
+          {
+            BASE_URL: '/api'
+          },
+          { $ref: 'core.services.accessTokenService' },
+          { $ref: 'core.services.navigationService' }
+        ]
+      },
+      'core.services.logService': {
+        class: LogService,
+        public: true
+      },
+      'core.services.navigationService': {
+        class: NavigationService,
+        public: true
+      }
+    },
     store: coreStore(reducers)
   };
 }
