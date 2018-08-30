@@ -10,6 +10,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.78.0",
     "history": "^4.7.2",
+    "hot-wire": "^0.0.2",
     "husky": "^0.14.3",
     "jest-dom": "^1.12.0",
     "jest-enzyme": "^6.0.2",
