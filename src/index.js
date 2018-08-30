@@ -64,7 +64,7 @@ container.then(services => {
     module.hot.accept('./app/routing.component', () =>
       render(require('./app/routing.component').default)
     );
-    module.hot.accept('./app/core/reducers/rootReducer', () => {
+    module.hot.accept('./app/core/reducers/root.reducer', () => {
       store.replaceReducer(connectRouter(history)(rootReducer));
     });
   }

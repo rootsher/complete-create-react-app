@@ -10,8 +10,8 @@ import {
   ProgressBar,
   Table
 } from 'react-bootstrap';
-import addBucks from '../../../core/actions/addBucks';
-import addUserBucks from '../../../core/actions/addUserBucks';
+import addBucks from '../../../core/actions/addBucks.action';
+import addUserBucks from '../../../core/actions/addUserBucks.action';
 
 const Home = ({ bucks, userBucks, dispatch }) => (
   <section className="route__home">
