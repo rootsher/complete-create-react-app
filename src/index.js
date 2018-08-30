@@ -9,7 +9,6 @@ import {
   routerMiddleware
 } from 'connected-react-router';
 import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
 import HotWire from 'hot-wire';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -35,9 +34,14 @@ const container = new HotWire().wire({
 container.then(services => {
   const middlewares = [
     routerMiddleware(history),
-    thunkMiddleware.withExtraArgument({ services }),
-    createLogger() // loggerMiddleware
+    thunkMiddleware.withExtraArgument({ services })
   ];
+
+  if (process.env.NODE_ENV === 'development') {
+    const { createLogger } = require('redux-logger');
+
+    middlewares.push(createLogger());
+  }
 
   const store = createStore(
     connectRouter(history)(rootReducer),
