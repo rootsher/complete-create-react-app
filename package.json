@@ -5,9 +5,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "3",
+    "connected-react-router": "^4.4.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.78.0",
+    "history": "^4.7.2",
     "husky": "^0.14.3",
     "jest-dom": "^1.12.0",
     "jest-enzyme": "^6.0.2",

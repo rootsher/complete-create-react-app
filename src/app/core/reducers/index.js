@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import { historyReducer } from './history';
+
+export default combineReducers({
+  history: historyReducer
+});

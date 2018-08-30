@@ -3,8 +3,7 @@ import { ApiService } from './services/api.service';
 import { LogService } from './services/log.service';
 import { NavigationService } from './services/navigation.service';
 
-import reducers from './reducers';
-import coreStore from './stores/core.store';
+import rootReducer from './reducers';
 
 export function module() {
   return {
@@ -34,6 +33,6 @@ export function module() {
         public: true
       }
     },
-    store: coreStore(reducers)
+    rootReducer
   };
 }
