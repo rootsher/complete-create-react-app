@@ -3,7 +3,7 @@ import { ApiService } from './services/api.service';
 import { LogService } from './services/log.service';
 import { NavigationService } from './services/navigation.service';
 
-import rootReducer from './reducers';
+import rootReducer from './reducers/rootReducer';
 
 export function module() {
   return {

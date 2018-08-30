@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './home.css';
 import {
   Breadcrumb,
@@ -10,7 +11,7 @@ import {
   Table
 } from 'react-bootstrap';
 
-export default () => (
+const Home = ({ bucks, userBucks, addBucks, addUserBucks }) => (
   <section className="route__home">
     <Breadcrumb>
       <Breadcrumb.Item href="#">Hoffffffffffffffffffffme</Breadcrumb.Item>
@@ -26,10 +27,16 @@ export default () => (
       <Button>Default</Button>
 
       {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-      <Button bsStyle="primary">Primary</Button>
+      <Button bsStyle="primary" onClick={() => addBucks()}>
+        Primary
+        {bucks}
+      </Button>
 
       {/* Indicates a successful or positive action */}
-      <Button bsStyle="success">Success</Button>
+      <Button bsStyle="success" onClick={() => addUserBucks()}>
+        Success
+        {userBucks}
+      </Button>
 
       {/* Contextual button for informational alert messages */}
       <Button bsStyle="info">Info</Button>
@@ -101,3 +108,17 @@ export default () => (
     </Panel>
   </section>
 );
+
+export default connect(
+  state => {
+    console.log(state);
+    return {
+      bucks: state.user.wallet.bucks,
+      userBucks: state.app && state.app.user.wallet.bucks
+    };
+  },
+  dispatch => ({
+    addBucks: () => dispatch({ type: 'ADD_BUCKS' }),
+    addUserBucks: () => dispatch({ type: 'ADD_USER_BUCKS' })
+  })
+)(Home);
