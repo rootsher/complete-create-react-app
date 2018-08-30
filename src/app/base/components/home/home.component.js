@@ -10,11 +10,13 @@ import {
   ProgressBar,
   Table
 } from 'react-bootstrap';
+import addBucks from '../../../core/actions/addBucks';
+import addUserBucks from '../../../core/actions/addUserBucks';
 
-const Home = ({ bucks, userBucks, addBucks, addUserBucks }) => (
+const Home = ({ bucks, userBucks, dispatch }) => (
   <section className="route__home">
     <Breadcrumb>
-      <Breadcrumb.Item href="#">Hoffffffffffffffffffffme</Breadcrumb.Item>
+      <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
       <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
         Library
       </Breadcrumb.Item>
@@ -27,13 +29,13 @@ const Home = ({ bucks, userBucks, addBucks, addUserBucks }) => (
       <Button>Default</Button>
 
       {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-      <Button bsStyle="primary" onClick={() => addBucks()}>
+      <Button bsStyle="primary" onClick={() => dispatch(addBucks())}>
         Primary
         {bucks}
       </Button>
 
       {/* Indicates a successful or positive action */}
-      <Button bsStyle="success" onClick={() => addUserBucks()}>
+      <Button bsStyle="success" onClick={() => dispatch(addUserBucks())}>
         Success
         {userBucks}
       </Button>
@@ -109,13 +111,7 @@ const Home = ({ bucks, userBucks, addBucks, addUserBucks }) => (
   </section>
 );
 
-export default connect(
-  state => ({
-    bucks: state.user.wallet.bucks,
-    userBucks: state.app.user.wallet.bucks
-  }),
-  dispatch => ({
-    addBucks: () => dispatch({ type: 'ADD_BUCKS' }),
-    addUserBucks: () => dispatch({ type: 'ADD_USER_BUCKS' })
-  })
-)(Home);
+export default connect(state => ({
+  bucks: state.user.wallet.bucks,
+  userBucks: state.app.user.wallet.bucks
+}))(Home);

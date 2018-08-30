@@ -8,6 +8,8 @@ import {
   connectRouter,
   routerMiddleware
 } from 'connected-react-router';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
@@ -23,9 +25,15 @@ const { rootReducer } = coreModule();
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const middlewares = [
+  routerMiddleware(history),
+  thunkMiddleware.withExtraArgument({}),
+  createLogger() // loggerMiddleware
+];
+
 const store = createStore(
   connectRouter(history)(rootReducer),
-  composeEnhancer(applyMiddleware(routerMiddleware(history)))
+  composeEnhancer(applyMiddleware(...middlewares))
 );
 
 const render = Component =>
