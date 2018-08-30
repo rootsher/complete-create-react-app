@@ -1,5 +1,3 @@
-import { userReducer } from './user';
+import reducers from './reducers';
 
-export const sharedReducers = {
-  user: userReducer
-};
+export const sharedReducers = reducers;

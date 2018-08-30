@@ -1,10 +1,6 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { combineReducers } from 'redux';
-import { userReducer } from './user';
 
-const reducers = combineReducers({
-  user: userReducer
-});
+import reducers from './reducers';
 
 export const appReducer = (state = {}, action) => {
   if (action.type === LOCATION_CHANGE) {

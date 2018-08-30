@@ -110,13 +110,10 @@ const Home = ({ bucks, userBucks, addBucks, addUserBucks }) => (
 );
 
 export default connect(
-  state => {
-    console.log(state);
-    return {
-      bucks: state.user.wallet.bucks,
-      userBucks: state.app && state.app.user.wallet.bucks
-    };
-  },
+  state => ({
+    bucks: state.user.wallet.bucks,
+    userBucks: state.app.user.wallet.bucks
+  }),
   dispatch => ({
     addBucks: () => dispatch({ type: 'ADD_BUCKS' }),
     addUserBucks: () => dispatch({ type: 'ADD_USER_BUCKS' })
