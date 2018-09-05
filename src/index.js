@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
 import {
   ConnectedRouter,
@@ -15,20 +15,33 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
 // modules:
+import { module as authModule } from './app/auth/auth.module';
+import { module as baseModule } from './app/base/base.module';
 import { module as coreModule } from './app/core/core.module';
+import { module as dummyModule } from './app/dummy/dummy.module';
 
 import App from './app/routing.component';
 import registerServiceWorker from './registerServiceWorker';
 
+const { services: authServices } = authModule();
+const { services: baseServices, reducers: baseReducers } = baseModule();
 const { rootReducer, services: coreServices } = coreModule();
+const { services: dummyServices } = dummyModule();
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const container = new HotWire().wire({
   services: {
-    ...coreServices
+    ...authServices,
+    ...baseServices,
+    ...coreServices,
+    ...dummyServices
   }
+});
+
+const reducers = combineReducers({
+  ...baseReducers
 });
 
 container.then(services => {
@@ -44,7 +57,7 @@ container.then(services => {
   }
 
   const store = createStore(
-    connectRouter(history)(rootReducer),
+    connectRouter(history)(rootReducer({ reducers })),
     composeEnhancer(applyMiddleware(...middlewares))
   );
 
