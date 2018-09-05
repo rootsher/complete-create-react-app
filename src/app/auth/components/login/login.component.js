@@ -10,7 +10,13 @@ class LoginComponent extends Component {
   }
 
   _onClick() {
+    const { history, location } = this.props;
+
     this.props.login();
+
+    if (location.state && location.state.from) {
+      history.push(location.state.from.pathname);
+    }
   }
 }
 
