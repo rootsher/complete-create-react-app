@@ -2,10 +2,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import login from '../../actions/login.action';
+import type BrowserHistory from 'history/createBrowserHistory';
+import type BrowserLocation from 'history/createBrowserHistory';
+import type { Dispatch } from 'redux';
+
+import login, { AUTH_LOGIN } from '../../actions/login.action';
 import Login from './login.template';
 
-class LoginComponent extends Component<any, any> {
+type Props = {
+  history: BrowserHistory,
+  location: BrowserLocation,
+  login(): any //dispatch
+};
+
+class LoginComponent extends Component<Props, null> {
+  static defaultProps = {};
+
   render() {
     return <Login onClick={() => this._onClick()} />;
   }
@@ -21,11 +33,15 @@ class LoginComponent extends Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any): any => ({
+  session: state.session
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<{ type: AUTH_LOGIN }>) => ({
+  login: () => dispatch(login())
+});
+
 export default connect(
-  state => ({
-    session: state.session
-  }),
-  (dispatch: any) => ({
-    login: () => dispatch(login())
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(LoginComponent);
