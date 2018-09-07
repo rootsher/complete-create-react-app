@@ -1,10 +1,11 @@
+//@flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import login from '../../actions/login.action';
 import Login from './login.template';
 
-class LoginComponent extends Component {
+class LoginComponent extends Component<any, any> {
   render() {
     return <Login onClick={() => this._onClick()} />;
   }
@@ -24,7 +25,7 @@ export default connect(
   state => ({
     session: state.session
   }),
-  dispatch => ({
+  (dispatch: any) => ({
     login: () => dispatch(login())
   })
 )(LoginComponent);
