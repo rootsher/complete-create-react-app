@@ -1,28 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import logout from './auth/actions/logout.action';
 
 import Routing from './routing.template';
 
-class RoutingComponent extends Component {
+class RoutingComponent extends PureComponent {
   render() {
-    const { session, logout } = this.props;
-
-    return (
-      <Routing isAuthenticated={session.isAuthenticated} logout={logout} />
-    );
+    return <Routing />;
   }
 }
 
-export default withRouter(
-  connect(
-    state => ({
-      session: state.session
-    }),
-    dispatch => ({
-      logout: () => dispatch(logout())
-    })
-  )(RoutingComponent)
-);
+export default withRouter(RoutingComponent);

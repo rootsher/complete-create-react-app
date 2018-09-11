@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 // modules:
 import { module as authModule } from './app/auth/auth.module';
 import { module as baseModule } from './app/base/base.module';
+import { module as commonModule } from './app/common/common.module';
 import { module as coreModule } from './app/core/core.module';
 import { module as dummyModule } from './app/dummy/dummy.module';
 
@@ -25,6 +26,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const { services: authServices } = authModule();
 const { services: baseServices, reducers: baseReducers } = baseModule();
+const { services: commonServices } = commonModule();
 const { rootReducer, services: coreServices } = coreModule();
 const { services: dummyServices } = dummyModule();
 
@@ -35,6 +37,7 @@ const container = new HotWire().wire({
   services: {
     ...authServices,
     ...baseServices,
+    ...commonServices,
     ...coreServices,
     ...dummyServices
   }

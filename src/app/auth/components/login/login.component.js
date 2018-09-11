@@ -29,6 +29,8 @@ class LoginComponent extends Component<Props, null> {
 
     if (location.state && location.state.from) {
       history.push(location.state.from.pathname);
+    } else {
+      history.push('/');
     }
   }
 }
