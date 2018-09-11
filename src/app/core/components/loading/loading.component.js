@@ -4,7 +4,12 @@ export default ({ isLoading, error }) => {
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (error) {
-    return <div>Sorry, there was a problem loading the page.</div>;
+    console.log(error);
+    return (
+      <div>
+        <h2>Sorry, there was a problem loading the page.</h2>
+      </div>
+    );
   }
 
   return null;
