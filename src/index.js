@@ -11,8 +11,8 @@ import {
 import thunkMiddleware from 'redux-thunk';
 import HotWire from 'hot-wire';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+//import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap-theme.css';
 
 // modules:
 import { module as authModule } from './app/auth/auth.module';
